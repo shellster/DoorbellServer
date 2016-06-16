@@ -7,9 +7,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-/**
- * Created by shellster on 6/15/2016.
- */
 public class udpServer  extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] params) {
@@ -20,7 +17,7 @@ public class udpServer  extends AsyncTask<String, Void, String> {
     private void udpServerRun() {
         String lText;
         byte[] lMsg = new byte[2048];
-        MediaPlayer mediaPlayer=MediaPlayer.create(doorbellserver.getAppContext(),R.raw.doorbell);
+        MediaPlayer mediaPlayer=MediaPlayer.create(watchDog.getAppContext(),R.raw.doorbell);
 
         while(true) {
             DatagramPacket dp = new DatagramPacket(lMsg, lMsg.length);

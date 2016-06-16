@@ -2,12 +2,15 @@ package com.shellster.doorbellserver;
 
 import android.app.Notification;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 public class watchDog extends Service {
+    private static Context context;
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -17,6 +20,7 @@ public class watchDog extends Service {
     public void onCreate() {
         try {
             super.onCreate();
+            watchDog.context = this;
             runAsForeground();
             udpServer job = new udpServer();
             job.execute();
@@ -41,5 +45,9 @@ public class watchDog extends Service {
                 .setContentText("Doorbell").build();
 
         startForeground(1, notification);
+    }
+
+    public static Context getAppContext() {
+        return context;
     }
 }
