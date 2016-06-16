@@ -1,5 +1,8 @@
 package com.shellster.doorbellserver;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import java.io.IOException;
@@ -7,9 +10,14 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-public class udpServer  extends AsyncTask<String, Void, String> {
+public class udpServer extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String[] params) {
+        PackageManager pm = watchDog.getAppContext().getPackageManager();
+        Intent intent = pm.getLaunchIntentForPackage("com.rcreations.ipcamviewerBasic");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        watchDog.getAppContext().startActivity(intent);
+
         udpServerRun();
         return "Done";
     }
